@@ -23,6 +23,7 @@ services:
       - "0.0.0.0:8787:8787"      # Dask dashboard
       - "0.0.0.0:8786:8786"      # Dask scheduler
     volumes:
-      - /home/ubuntu/rapids_singlecell-notebooks:/rapids/notebooks
-    command: python -m jupyter lab --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token='' --NotebookApp.password=''
+      - /home/ubuntu/rapids_singlecell-notebooks:/notebooks
+    user: "ubuntu:ubuntu"
+    command: python -m jupyter lab --ip=0.0.0.0 --no-browser --NotebookApp.token='' --NotebookApp.password=''
     restart: unless-stopped

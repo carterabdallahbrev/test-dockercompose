@@ -24,6 +24,5 @@ services:
       - "0.0.0.0:8786:8786"      # Dask scheduler
     volumes:
       - /home/ubuntu/rapids_singlecell-notebooks:/notebooks
-    entrypoint: []  # Override the default entrypoint
-    command: bash -c "python -m jupyter lab --ip=0.0.0.0 --no-browser --NotebookApp.token='' --NotebookApp.password=''"
+    command: python -m jupyter lab --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token='' --NotebookApp.password=''
     restart: unless-stopped

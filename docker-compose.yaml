@@ -23,13 +23,9 @@ services:
       - "0.0.0.0:8787:8787"      # Dask dashboard
       - "0.0.0.0:8786:8786"      # Dask scheduler
     volumes:
-      - /home/ubuntu/rapids_singlecell-notebooks:/notebooks
+      - /home/ubuntu/rapids_singlecell-notebooks:/notebooks:ro
     user: root
     working_dir: /notebooks
-    entrypoint: ["/bin/bash", "-c"]
-    command: |
-      rm -rf /notebooks/* &&
-      chown -R 1000:1000 /notebooks &&
-      chmod 755 /notebooks &&
-      /home/rapids/entrypoint.sh python -m jupyter lab --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token='' --NotebookApp.password='' --notebook-dir=/notebooks
+    entrypoint: ["/home/rapids/entrypoint.sh"]
+    command: python -m jupyter lab --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token='' --NotebookApp.password='' --notebook-dir=/notebooks
     restart: unless-stopped
